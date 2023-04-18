@@ -1,12 +1,12 @@
 test(`should yield objects with value and done properties`, () => {
   const odds = giveMeOneOddNumber()
 
-  expect(odds.next().value).toBe(/* ENTER YOUR GUESS */)
-  expect(odds.next().value).toBe(/* ENTER YOUR GUESS */)
-  expect(odds.next().done).toBe(/* ENTER YOUR GUESS */)
+  expect(odds.next().value).toBe(/* ENTER YOUR GUESS */1)
+  expect(odds.next().value).toBe(/* ENTER YOUR GUESS */3)
+  expect(odds.next().done).toBe(/* ENTER YOUR GUESS */false)
   odds.next()
-  expect(odds.next().value).toBe(/* ENTER YOUR GUESS */)
-  expect(odds.next().done).toBe(/* ENTER YOUR GUESS */)
+  expect(odds.next().value).toBe(/* ENTER YOUR GUESS */9)
+  expect(odds.next().done).toBe(/* ENTER YOUR GUESS */true)
 
   function* giveMeOneOddNumber() {
     yield 1
@@ -33,7 +33,7 @@ test(`can be iterated over`, () => {
     sum = sum + even
   }
 
-  expect(sum).toBe(/* ENTER YOUR GUESS */)
+  expect(sum).toBe(/* ENTER YOUR GUESS */20)
 })
 
 //////// Elaboration & Feedback /////////
@@ -41,7 +41,7 @@ test(`can be iterated over`, () => {
 http://ws.kcd.im/?ws=ES6+and+Beyond&e=Generators&em=
 */
 test('I submitted my elaboration and feedback', () => {
-  const submitted = false // change this when you've submitted!
+  const submitted = true // change this when you've submitted!
   expect(true).toBe(submitted)
 })
 ////////////////////////////////

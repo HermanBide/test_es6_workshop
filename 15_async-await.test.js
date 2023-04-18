@@ -1,21 +1,17 @@
 // Rewrite all of these from promises to async/await
 // tip: you can turn the `it` callbacks to async functions by adding `async` to them :)
 test('should work with resolved promises', async () => {
-  return doAsync().then(result => {
-    expect(result).toBe('resolved')
-    throw new Error(
-      'convert this to an async/await function and remove this error',
-    )
-  })
+  const response = await doAsync()
+  expect(response).toBe('resolved')
 })
 
 test('should throw an error with a rejected promise', async () => {
-  return doAsync(true).catch(error => {
-    expect(error).toBe('rejected')
-    throw new Error(
-      'convert this to an async/await function and remove this error',
-    )
-  })
+  try{
+    await doAsync(true)
+    throw new Error('this should not run')
+  } catch(err){
+    expect(err).toBe('rejected')
+  }
 })
 
 function doAsync(rejectPromise = false) {
@@ -35,7 +31,7 @@ function doAsync(rejectPromise = false) {
 http://ws.kcd.im/?ws=ES6+and+Beyond&e=Async/Await&em=
 */
 test('I submitted my elaboration and feedback', () => {
-  const submitted = false // change this when you've submitted!
+  const submitted = true // change this when you've submitted!
   expect(true).toBe(submitted)
 })
 ////////////////////////////////

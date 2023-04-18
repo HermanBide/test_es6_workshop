@@ -75,7 +75,17 @@ test.skip('can be used to do some fancy stuff with arrays', () => {
     'Pigwidgeon',
   ]
 
-  const handler = {}
+  const handler = {
+    get(target, name) {
+      console.log({target, name})
+      if (name in target) {
+        return Reflect.get(target, name)
+      } else {
+        const index = Number(name)
+        return Reflect.get(target, target.length + index)
+      }
+    },
+  }
   const proxy = new Proxy(characters, handler)
   expect(proxy[0]).toBe('Harry Potter')
   expect(proxy[-1]).toBe('Pigwidgeon')
@@ -87,7 +97,7 @@ test.skip('can be used to do some fancy stuff with arrays', () => {
 http://ws.kcd.im/?ws=ES6+and+Beyond&e=Proxies&em=
 */
 test('I submitted my elaboration and feedback', () => {
-  const submitted = false // change this when you've submitted!
+  const submitted = true // change this when you've submitted!
   expect(true).toBe(submitted)
 })
 ////////////////////////////////
