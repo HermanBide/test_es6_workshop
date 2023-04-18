@@ -31,6 +31,7 @@ test('can use the ... operator on the iterator', () => {
   const set = new Set([1, 2, 2, 3])
   // use destructuring and the ... operator to create a
   // `rest` variable that only has the last two items.
+  
   const [rest] = set
   expect(rest).toEqual([2, 3])
 })

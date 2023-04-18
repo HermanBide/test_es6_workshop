@@ -26,6 +26,10 @@ test(`should be able to merge properties from objects`, () => {
     baz: 'foobar',
   }
   // create a result object that uses the spread operator to add `eggs: 'spam'` to what exists in obj1
+  const result = {
+    ...obj1,
+    eggs: 'spam',
+  }
   expect(result).toEqual({
     foo: 'bar',
     baz: 'foobar',

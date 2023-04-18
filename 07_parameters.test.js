@@ -6,7 +6,7 @@ test('can be triggered when the incoming argument is undefined', () => {
   expect(getName('Aaron')).toBe(/*ENTER YOUR GUESS HERE*/'Aaron')
   expect(getName(undefined)).toBe(/*ENTER YOUR GUESS HERE*/'Mercury')
   expect(getName(null)).toBe(/*ENTER YOUR GUESS HERE*/null)
-  expect(getName()).toBe(/*ENTER YOUR GUESS HERE*/'Mecury')
+  expect(getName()).toBe(/*ENTER YOUR GUESS HERE*/'Mercury')
 })
 
 test(`aren't included in arguments`, () => {
@@ -49,7 +49,7 @@ test('catch non-specified params', () => {
   expect(resty(1, 2, 3).length).toBe(/*ENTER YOUR GUESS HERE*/1)
   expect(
     resty(1, 2, 3, undefined, 5, undefined, 7, undefined, 9, 10).length,
-  ).toBe(/*ENTER YOUR GUESS HERE*/)
+  ).toBe(/*ENTER YOUR GUESS HERE*/8)
 })
 
 test('has a different length than `arguments`', () => {

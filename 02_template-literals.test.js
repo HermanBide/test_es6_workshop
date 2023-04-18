@@ -22,8 +22,8 @@ test('should support string interpolation', () => {
 test(`should support multi-line strings`, () => {
   // construct a string with multiple lines without needing escaped newline characters
   const multiLine = `
-  How cool
-  is this!?
+    How cool
+    is this!?
   `
   expect(multiLine).toBe('\n    How cool\n    is this!?\n  ')
 })
@@ -47,7 +47,7 @@ test.skip(`should call the tagging function`, () => {
 
   function tagIt(literalString, ...interpolatedParts) {
     // implement this function to make the test pass
-    const firstPart = `${literalString[0]}super-cool ${interpolatedParts[0]}`
+    const firstPart = `${literalString[0]}, super-cool ${interpolatedParts[0]}`
     const lastPart = `${literalString[1]}really ${interpolatedParts[1]}${literalString[2]}`
     return `${firstPart}${lastPart}`
   }
