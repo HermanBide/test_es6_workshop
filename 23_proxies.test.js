@@ -20,7 +20,8 @@ function getCharacter() {
 
 test('can wrap an existing object', () => {
   const character = getCharacter()
-  const proxy = character
+  const handler = {}
+  const proxy = new Proxy(character, handler)
   expect(proxy).not.toBe(character) // referential equality
   expect(proxy).toEqual(character) // deep equality
 })
@@ -28,7 +29,25 @@ test('can wrap an existing object', () => {
 test('handler can intercept gets, sets, and deletes', () => {
   const character = getCharacter()
 
-  const handler = {}
+  const handler = {
+    get(target, name) {
+      return name.split('.').reduce(Reflect.get, target)
+    },
+    set(target, name, value) {
+      const splitNames = name.split('.')
+      const lastIndex = splitNames.length - 1
+      const finalTarget = splitNames
+        .filter((item, index) => index < lastIndex)
+        .reduce(Reflect.get, target)
+      return Reflect.set(finalTarget, splitNames[lastIndex], value)
+    },
+    deleteProperty(target, name) {
+      if (name.startsWith('_')) {
+        return true 
+      }
+      return Reflect.deleteProperty(target, name)
+    },
+  }
   const proxy = new Proxy(character, handler)
 
   // interact with the proxy
@@ -51,7 +70,18 @@ test('handler can intercept gets, sets, and deletes', () => {
 test.skip('can intercept function calls', () => {
   const character = getCharacter()
 
-  const handler = {}
+  const handler = {
+    apply(target, thisArg, argumentsList) {
+      const result = Reflect.apply(target, thisArg, argumentsList)
+      if (typeof result === 'string') {
+        return result.replace(
+          new RegExp(`(${thisArg._id})|(${thisArg.password})`, 'g'),
+          'HIDDEN',
+        )
+      }
+      return result
+    },
+  }
   // notice that `apply` only works for proxies on functions!
   character.greet = new Proxy(character.greet, handler)
   character.getTeachers = new Proxy(character.getTeachers, handler)
